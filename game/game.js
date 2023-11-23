@@ -282,6 +282,7 @@ document.getElementById("polojit").addEventListener("click", function(event) {//
     diller_top = 20
     for(let i = 0; i < remove_img.length; i++){
         const image = document.querySelector(`img[src="kart/${remove_img[i]}"]`);
+        console.log(image)
         image.parentNode.removeChild(image);
     }
     let coin1 = chislo_coin; 
