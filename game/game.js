@@ -124,6 +124,7 @@ function img_kart_diller(key) {
     var oImg = document.createElement("img");
     oImg.setAttribute('src', 'kart/' + key + '.png');
     remove_img.push(key + '.png');
+    oImg.setAttribute('class', 'imgs');
     oImg.setAttribute('alt', 'karta');
     oImg.setAttribute('height', '150px');
     oImg.setAttribute('width', '100px');
