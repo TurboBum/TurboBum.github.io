@@ -130,6 +130,7 @@ function img_kart_diller(key) {
     oImg.style.position = "absolute";
     oImg.style.top = '110px';
     oImg.style.right = '50px';
+    oImg.style.сlass = "image";
     document.body.appendChild(oImg);
     
     setTimeout(function() {
