@@ -1,3 +1,4 @@
+// Если уведомление всплывёт, и нажать играть, то после того как уведомление исчезнит карты тоже исчезнуть и страница будет неиграбельной исправить
 const moneta = document.getElementById("coin");
 const chislo_coin = document.getElementById("chislo");
 const chislo_diller = document.getElementById("diller");
