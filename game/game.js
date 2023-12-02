@@ -1,4 +1,3 @@
-// Если уведомление всплывёт, и нажать играть, то после того как уведомление исчезнит карты тоже исчезнуть и страница будет неиграбельной исправить
 const moneta = document.getElementById("coin");
 const chislo_coin = document.getElementById("chislo");
 const chislo_diller = document.getElementById("diller");
@@ -12,7 +11,17 @@ function getCookie(name) {
  }
  console.log( document.cookie );
 
- function showNotification(text) {
+
+
+
+function showNotification(text) {
+    let bule = false
+    if (parseInt(chislo_coin.innerText) != 0 || parseInt(chislo_diller.innerText) != 0){
+        bule = true
+    }
+    else{
+        bule = false
+    }
     // Создаем элемент уведомления
     const notification = document.createElement('div');
     notification.className = 'notification'; // Применяем класс CSS для стилизации
@@ -25,14 +34,43 @@ function getCookie(name) {
   
     // Через некоторое время удаляем уведомление
     setTimeout(() => {
-      notification.remove();
-      Ochki_Zero(); // Вызываем функцию Ochki_Zero() после удаления уведомления
-      const elements = document.getElementsByClassName("imgs");
-    while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
+        notification.remove();
+        if (bule){
+            Ochki_Zero(); // Вызываем функцию Ochki_Zero() после удаления уведомления
+            const elements = document.getElementsByClassName("imgs");
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+        }
     } 
     }, 3400); // Указывается время в миллисекундах до удаления уведомления (в данном случае 3.4 секунды)
-  }
+}
+
+
+
+
+function showNotification_Info(text) {
+
+    // Создаем элемент уведомления
+    const notification = document.createElement('div');
+    notification.className = 'notification'; // Применяем класс CSS для стилизации
+  
+    // Добавляем текст в уведомление
+    notification.textContent = text;
+  
+    // Добавляем уведомление на страницу
+    document.body.appendChild(notification);
+  
+    // Через некоторое время удаляем уведомление
+    setTimeout(() => {
+        notification.remove();
+    }, 3400); // Указывается время в миллисекундах до удаления уведомления (в данном случае 3.4 секунды)
+}
+
+
+
+
+
+
 
 
 // Проверяем, поддерживает ли браузер функцию открытия на весь экран
@@ -65,6 +103,9 @@ function getCookie(name) {
 //   // Вызываем функцию открытия на весь экран при клике на страницу
 //   document.addEventListener('click', toggleFullscreen);
   
+
+
+
 let vzad = document.getElementById("vzad");
 let sebe = document.getElementById("emu");
 let edvoit = document.getElementById("ydvoit");
@@ -400,19 +441,26 @@ function diller() {
 document.getElementById("vzad").addEventListener("click", function(event) {//ПОПРОСИТЬ ЕЩЁ
     event.preventDefault();
     console.log(spisok);
-    let chisloKart1 = chislo_chisloKart;
-    let chisloKart = parseInt(chisloKart1.innerHTML);
-    if (chisloKart>21){
-        let vzad = document.getElementById("vzad")
-        vzad.disabled = true;
-        showNotification("Нельзя, ты проиграл");
-        // alert("Нельзя, ты проиграл")
+    rr(); 
+    const chislo_chisloKart_update = document.getElementById("chisloKart");
+    if(parseInt(chislo_chisloKart_update.innerHTML) > 21 ){
+        showNotification("Увы но ты проиграл");
         button()
         Over()
     }
-    else{
-    rr();  
-    }
+    // let chisloKart1 = chislo_chisloKart;
+    // let chisloKart = parseInt(chisloKart1.innerHTML);
+    // if (chisloKart>21){
+    //     let vzad = document.getElementById("vzad")
+    //     vzad.disabled = true;
+    //     showNotification("Нельзя, ты проиграл");
+    //     // alert("Нельзя, ты проиграл")
+    //     button()
+    //     Over()
+    // }
+    // else{
+    // rr();  
+    // }
 })
 document.getElementById("ydvoit").addEventListener("click", function(event) {//УДВОИТЬ ОЧКИ
     event.preventDefault();
@@ -422,8 +470,7 @@ document.getElementById("ydvoit").addEventListener("click", function(event) {//�
     let coin = parseInt(coin1.innerHTML); 
     
     if (coin < stavka){
-        showNotification("Удвоение ставки невозможно.");
-        // alert("Удвоение ставки невозможно.")
+        showNotification_Info("Удвоение ставки невозможно.");
     }
     else{
         stavka1.innerHTML = stavka * 2;
