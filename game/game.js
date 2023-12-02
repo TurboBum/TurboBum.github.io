@@ -356,7 +356,7 @@ document.getElementById("polojit").addEventListener("click", function(event) {//
     let coin1 = chislo_coin; 
     let coin = parseInt(coin1.innerHTML); 
     if (coin === 0 ){ 
-    showNotification("Нужна ставка");
+    showNotification_Info("Нужна ставка");
     // alert("Нужна ставка") 
     } 
     else{
