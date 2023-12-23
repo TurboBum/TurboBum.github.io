@@ -11,17 +11,7 @@ function getCookie(name) {
  }
  console.log( document.cookie );
 
-
-
-
-function showNotification(text) {
-    let bule = false
-    if (parseInt(chislo_coin.innerText) != 0 || parseInt(chislo_diller.innerText) != 0){
-        bule = true
-    }
-    else{
-        bule = false
-    }
+ function showNotification(text) {
     // Создаем элемент уведомления
     const notification = document.createElement('div');
     notification.className = 'notification'; // Применяем класс CSS для стилизации
@@ -34,43 +24,14 @@ function showNotification(text) {
   
     // Через некоторое время удаляем уведомление
     setTimeout(() => {
-        notification.remove();
-        if (bule){
-            Ochki_Zero(); // Вызываем функцию Ochki_Zero() после удаления уведомления
-            const elements = document.getElementsByClassName("imgs");
-            while(elements.length > 0){
-                elements[0].parentNode.removeChild(elements[0]);
-        }
+      notification.remove();
+      Ochki_Zero(); // Вызываем функцию Ochki_Zero() после удаления уведомления
+      const elements = document.getElementsByClassName("imgs");
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
     } 
     }, 3400); // Указывается время в миллисекундах до удаления уведомления (в данном случае 3.4 секунды)
-}
-
-
-
-
-function showNotification_Info(text) {
-
-    // Создаем элемент уведомления
-    const notification = document.createElement('div');
-    notification.className = 'notification'; // Применяем класс CSS для стилизации
-  
-    // Добавляем текст в уведомление
-    notification.textContent = text;
-  
-    // Добавляем уведомление на страницу
-    document.body.appendChild(notification);
-  
-    // Через некоторое время удаляем уведомление
-    setTimeout(() => {
-        notification.remove();
-    }, 3400); // Указывается время в миллисекундах до удаления уведомления (в данном случае 3.4 секунды)
-}
-
-
-
-
-
-
+  }
 
 
 // Проверяем, поддерживает ли браузер функцию открытия на весь экран
@@ -103,9 +64,6 @@ function showNotification_Info(text) {
 //   // Вызываем функцию открытия на весь экран при клике на страницу
 //   document.addEventListener('click', toggleFullscreen);
   
-
-
-
 let vzad = document.getElementById("vzad");
 let sebe = document.getElementById("emu");
 let edvoit = document.getElementById("ydvoit");
@@ -207,7 +165,7 @@ function img_kart_diller(key) {
     
 }
 
-user_top = 20
+user_top = 20;
 
 function img_kart_user(key) {
     let x_y = document.getElementById("fishki").getBoundingClientRect();
@@ -230,9 +188,36 @@ function img_kart_user(key) {
     setTimeout(function() {
         oImg.style.top = '69%';
         oImg.style.left = user_top+'%';
-        user_top = user_top + 8
+        user_top = user_top + 8;
+        
+        // Добавляем возможность перетаскивания картинки
+        makeDraggable(oImg);
     }, 1000);
-    
+}
+
+function makeDraggable(element) {
+    var isDragging = false;
+    var offset = { x: 0, y: 0 };
+
+    element.addEventListener("mousedown", function (event) {
+        isDragging = true;
+        var boundingRect = element.getBoundingClientRect();
+        offset.x = event.clientX - boundingRect.left;
+        offset.y = event.clientY - boundingRect.top;
+    });
+
+    element.addEventListener("mouseup", function () {
+        isDragging = false;
+    });
+
+    element.addEventListener("mousemove", function (event) {
+        if (isDragging) {
+            var x = event.clientX - offset.x;
+            var y = event.clientY - offset.y;
+            element.style.left = x + "px";
+            element.style.top = y + "px";
+        }
+    });
 }
 
 
@@ -356,7 +341,7 @@ document.getElementById("polojit").addEventListener("click", function(event) {//
     let coin1 = chislo_coin; 
     let coin = parseInt(coin1.innerHTML); 
     if (coin === 0 ){ 
-    showNotification_Info("Нужна ставка");
+    showNotification("Нужна ставка");
     // alert("Нужна ставка") 
     } 
     else{
@@ -441,26 +426,19 @@ function diller() {
 document.getElementById("vzad").addEventListener("click", function(event) {//ПОПРОСИТЬ ЕЩЁ
     event.preventDefault();
     console.log(spisok);
-    rr(); 
-    const chislo_chisloKart_update = document.getElementById("chisloKart");
-    if(parseInt(chislo_chisloKart_update.innerHTML) > 21 ){
-        showNotification("Увы но ты проиграл");
+    let chisloKart1 = chislo_chisloKart;
+    let chisloKart = parseInt(chisloKart1.innerHTML);
+    if (chisloKart>21){
+        let vzad = document.getElementById("vzad")
+        vzad.disabled = true;
+        showNotification("Нельзя, ты проиграл");
+        // alert("Нельзя, ты проиграл")
         button()
         Over()
     }
-    // let chisloKart1 = chislo_chisloKart;
-    // let chisloKart = parseInt(chisloKart1.innerHTML);
-    // if (chisloKart>21){
-    //     let vzad = document.getElementById("vzad")
-    //     vzad.disabled = true;
-    //     showNotification("Нельзя, ты проиграл");
-    //     // alert("Нельзя, ты проиграл")
-    //     button()
-    //     Over()
-    // }
-    // else{
-    // rr();  
-    // }
+    else{
+    rr();  
+    }
 })
 document.getElementById("ydvoit").addEventListener("click", function(event) {//УДВОИТЬ ОЧКИ
     event.preventDefault();
@@ -470,7 +448,8 @@ document.getElementById("ydvoit").addEventListener("click", function(event) {//�
     let coin = parseInt(coin1.innerHTML); 
     
     if (coin < stavka){
-        showNotification_Info("Удвоение ставки невозможно.");
+        showNotification("Удвоение ставки невозможно.");
+        // alert("Удвоение ставки невозможно.")
     }
     else{
         stavka1.innerHTML = stavka * 2;
@@ -487,7 +466,7 @@ document.getElementById("emu").addEventListener("click", function(event) {
     let stavka = parseInt(stavka1.innerHTML);
     let dilleron = parseInt(diller1.innerHTML); 
     if (stavka > 21){
-        showNotification("Вы проиграли123");
+        showNotification("Вы проиграли");
         // alert("Вы проиграли123")
         button()
         Over()
@@ -501,7 +480,7 @@ document.getElementById("emu").addEventListener("click", function(event) {
         dilleron = parseInt(diller1.innerHTML);
         if (dilleron != -99) {
             if (dilleron >= 22) {
-                showNotification("Я проиграл 001");
+                showNotification("Я проиграл");
                 // alert("Я проиграл 001");
                 button()
                 WIN0()
