@@ -3,13 +3,20 @@ const chislo_coin = document.getElementById("chislo");
 const chislo_diller = document.getElementById("diller");
 const chislo_chisloKart = document.getElementById("chisloKart");
 localStorage.setItem('chislo_coin', 0);
-document.cookie = 'MONETA=1000; CHISLO=0; path=/; expires=99999999999999;';
+if (document.cookie.indexOf("MONETA") == 0) {
+    console.log('Куки есть');
+    
+}else{
+    document.cookie = 'MONETA=1000; CHISLO=0; path=/; expires=99999999999999;';
+}
+
 function getCookie(name) {
     let value = "; " + document.cookie;
     let parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
  }
  console.log( document.cookie );
+ moneta.innerText = getCookie('MONETA')
 
  function showNotification(text) {
     // Создаем элемент уведомления
@@ -32,7 +39,6 @@ function getCookie(name) {
     } 
     }, 3400); // Указывается время в миллисекундах до удаления уведомления (в данном случае 3.4 секунды)
   }
-
 
 // Проверяем, поддерживает ли браузер функцию открытия на весь экран
 function toggleFullscreen() {
@@ -60,10 +66,9 @@ function toggleFullscreen() {
       }
     }
   }
-  
   // Вызываем функцию открытия на весь экран при клике на страницу
   document.addEventListener('click', toggleFullscreen);
-  
+
 let vzad = document.getElementById("vzad");
 let sebe = document.getElementById("emu");
 let edvoit = document.getElementById("ydvoit");
