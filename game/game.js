@@ -35,34 +35,34 @@ function getCookie(name) {
 
 
 // Проверяем, поддерживает ли браузер функцию открытия на весь экран
-// function toggleFullscreen() {
-//     if (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled) {
-//       // Получаем DOM-элемент, который нужно открыть на весь экран
-//       var element = document.documentElement;
+function toggleFullscreen() {
+    if (document.fullscreenEnabled || document.webkitFullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled) {
+      // Получаем DOM-элемент, который нужно открыть на весь экран
+      var element = document.documentElement;
   
-//       // Проверяем, какая функция открытия на весь экран поддерживается в текущем браузере
-//       if (element.requestFullscreen) {
-//         element.requestFullscreen().catch((err) => {
-//           console.log(err);
-//         });
-//       } else if (element.webkitRequestFullscreen) {
-//         element.webkitRequestFullscreen().catch((err) => {
-//           console.log(err);
-//         });
-//       } else if (element.mozRequestFullScreen) {
-//         element.mozRequestFullScreen().catch((err) => {
-//           console.log(err);
-//         });
-//       } else if (element.msRequestFullscreen) {
-//         element.msRequestFullscreen().catch((err) => {
-//           console.log(err);
-//         });
-//       }
-//     }
-//   }
+      // Проверяем, какая функция открытия на весь экран поддерживается в текущем браузере
+      if (element.requestFullscreen) {
+        element.requestFullscreen().catch((err) => {
+          console.log(err);
+        });
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen().catch((err) => {
+          console.log(err);
+        });
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen().catch((err) => {
+          console.log(err);
+        });
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen().catch((err) => {
+          console.log(err);
+        });
+      }
+    }
+  }
   
-//   // Вызываем функцию открытия на весь экран при клике на страницу
-//   document.addEventListener('click', toggleFullscreen);
+  // Вызываем функцию открытия на весь экран при клике на страницу
+  document.addEventListener('click', toggleFullscreen);
   
 let vzad = document.getElementById("vzad");
 let sebe = document.getElementById("emu");
